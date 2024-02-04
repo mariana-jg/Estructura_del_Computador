@@ -1,0 +1,37 @@
+Un programa recibe a través de la pila un número en punto flotante de simple precisión
+y luego invoca a una subrutina (que debe ser declarada en el mismo módulo) la cual
+recibe ese número y determina el signo de su exponente devolviendo un 0 si es positivo y un 1 si es negativo.
+Solo si el exponente es negativo el programa antes de terminar escribe el numero en un dispositivo con dirección C2A00A12.
+
+A traves del stack el intercambio de argumentos.
+
+		.begin
+		.org 2048
+		.macro push arg
+		.macro pop arg
+
+main: 		ld [periferic], %r1
+		add %r15, %r0, %r31 !me guardo desde donde llamaron al main
+		call subrutina !devuelve 1 o un 0
+		pop %r2
+		andcc %r2, %r2, %r0
+		be done
+		pop %r3 !numero
+		st %r3, %r1
+		jmpl %r31+4, %r0 
+
+subrutina: 	pop %r4
+		sll %r4, 1, %r5
+		addcc %r5, %r0, %r0
+		bneg es_neg
+		push %r0
+		jmpl %r15+4, %r0
+
+es_neg:		add %r0, 1, %r7
+		push %r7
+		jmpl %r15+4, %r0
+
+periferic: 	0xC2A00A12
+
+		.end
+
