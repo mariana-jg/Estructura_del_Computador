@@ -1,5 +1,4 @@
-# EstructuraDelComp
-## Estructura del Computador (actual Organización del Computador - Electrónica) - Práctica Burín
+# Estructura del Computador (actual Organización del Computador - Electrónica) - Práctica Burín
 
 ### Cuatrimestre de Cursada
 2° Cuatrimestre 2023
